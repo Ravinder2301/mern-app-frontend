@@ -15,22 +15,22 @@ const Login = () => {
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("https://mern-app-backend-0pxu.onrender.com/login", values)
-      .then((res) => {
-        if (res.data.Status === "Success") {
-          toast.success("Successfully login!");
-          navigate("/");
-        } else {
-          toast.error
-          (res.data.Error);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await axios.post("https://mern-app-backend-0pxu.onrender.com/login", values);
+      if (res.data.Status === "Success") {
+        toast.success("Successfully logged in!");
+        console.log(res.data.Status);
+        // console.log(res.data.Token);
+        navigate("/");
+      } else {
+        toast.error(res.data.Error);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("An error occurred during login. Please try again later.");
+    }
   };
 
   return (

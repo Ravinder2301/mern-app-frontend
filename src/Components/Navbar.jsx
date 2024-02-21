@@ -54,6 +54,7 @@ const Navbar = () => {
           setAuth(false);
           setMessage(res.data.Error);
           console.log(res.data.Error);
+          // console.log(res.data.msg);
         }
       })
       .catch((err) => console.log(err));
