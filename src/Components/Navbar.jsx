@@ -160,18 +160,22 @@ const Navbar = () => {
             Login/Signup
           </RouterLink>
         )}
+
         <div className="flex gap-2 justify-center items-center sm:hidden">
-          <Badge
-            badgeContent={getData.length}
-            color="secondary"
-            id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-          >
-            <FaShoppingCart className="text-2xl" />
-          </Badge>
+          {auth && (
+            <Badge
+              badgeContent={getData.length}
+              color="secondary"
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <FaShoppingCart className="text-2xl" />
+            </Badge>
+          )}
+
           <RouterLink
             className="sm:hidden text-3xl relative"
             onClick={() => setShow(!show)}
@@ -312,7 +316,7 @@ const Navbar = () => {
           </ul>
           {auth ? (
             <RouterLink
-              to="/logout"
+              onClick={handleDelete}
               className="px-4 py-2  bg-yellow-700 text-white rounded"
             >
               Logout
